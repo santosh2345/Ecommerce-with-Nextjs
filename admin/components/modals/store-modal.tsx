@@ -15,6 +15,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
+import axios from "axios";
 
 const formSchema = z.object({
   name: z.string().min(3),
@@ -22,6 +24,7 @@ const formSchema = z.object({
 
 export const StoreModal = () => {
   const storeModal = useStoreModal();
+  const [loading, setLoading] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -31,8 +34,19 @@ export const StoreModal = () => {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    //todo create store
-    console.log(values);
+    
+    try {
+      setLoading(true);
+      const resonse = await axios.post("/api/stores", values);
+      
+    } catch (error) {
+      console.log("Error creating store: ", error)
+      
+    }
+    finally {
+      setLoading(false);
+      // storeModal.onClose();
+    }
   };
 
   return (
@@ -53,18 +67,22 @@ export const StoreModal = () => {
                   <FormItem>
                     <FormLabel>Name</FormLabel>
                     <FormControl>
-                      <Input placeholder="E-Commerce" {...field} />
+                      <Input
+                        disabled={loading}
+                        placeholder="E-Commerce"
+                        {...field}
+                      />
                     </FormControl>
-                    <FormMessage /> 
+                    <FormMessage />
                   </FormItem>
                 )}
               />
 
               <div className="pt-6 space-x-2 flex items-center justify-end w-full">
-                <Button variant="outline" onClick={storeModal.onClose}>
+                <Button disabled={loading} variant="outline" onClick={storeModal.onClose}>
                   Cancel
                 </Button>
-                <Button type="submit">Continue</Button>
+                <Button disabled={loading} type="submit">Continue</Button>
               </div>
             </form>
           </Form>

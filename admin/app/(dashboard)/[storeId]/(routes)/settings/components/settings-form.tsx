@@ -1,5 +1,6 @@
 "use client"
 
+import Heading from "@/components/ui/heading";
 import { Store } from "@prisma/client"
 
 interface SettingsFormProps {
@@ -10,7 +11,12 @@ const SettingsForm:React.FC<SettingsFormProps> = ({
     initialData
 }) => {
   return (
-    <div>SettingsForm</div>
+    <div className="flex items-center justify-between">
+        <Heading
+        title = "Settings"
+        description = "Update your store settings"
+        />
+        SettingsForm</div>
   )
 }
 

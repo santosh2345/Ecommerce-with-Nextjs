@@ -1,6 +1,14 @@
+"use client"
 
+import { Store } from "@prisma/client"
 
-const SettingsForm = () => {
+interface SettingsFormProps {
+    initialData: Store;
+    }
+
+const SettingsForm:React.FC<SettingsFormProps> = ({
+    initialData
+}) => {
   return (
     <div>SettingsForm</div>
   )

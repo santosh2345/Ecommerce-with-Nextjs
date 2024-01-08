@@ -10,7 +10,12 @@ import { useStoreModal } from "@/hooks/use-store-modal";
 import { Store } from "@prisma/client";
 import { useParams, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { Check, ChevronsUpDown, PlusCircle, Store as StoreIcon } from "lucide-react";
+import {
+  Check,
+  ChevronsUpDown,
+  PlusCircle,
+  Store as StoreIcon,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
   Command,
@@ -63,7 +68,7 @@ const StoreSwitcher = ({ className, items = [] }: StoreSwitcherProps) => {
           className={cn("w-[200px] justify-between", className)}
         >
           <StoreIcon className="mr-2 h-4 w-4" />
-          Current Store
+          {currentStore?.label}
           <ChevronsUpDown className="ml-auto h-4 w-4  shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
@@ -98,13 +103,13 @@ const StoreSwitcher = ({ className, items = [] }: StoreSwitcherProps) => {
           <CommandList>
             <CommandGroup>
               <CommandItem
-              onSelect={()=> {setOpen(false);
-              storeModal.onOpen()}}
+                onSelect={() => {
+                  setOpen(false);
+                  storeModal.onOpen();
+                }}
               >
                 <PlusCircle className="mr-2 h-5 w-5" />
                 Create Store
-
-
               </CommandItem>
             </CommandGroup>
           </CommandList>

@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import Heading from "@/components/ui/heading";
+import { Separator } from "@/components/ui/separator";
 import { Store } from "@prisma/client"
 import { Trash } from "lucide-react";
 
@@ -28,6 +29,7 @@ const SettingsForm:React.FC<SettingsFormProps> = ({
 
         </Button>
         </div>
+        <Separator />   
         </>
   )
 }

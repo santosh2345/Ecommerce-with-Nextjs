@@ -32,7 +32,7 @@ const SettingsPage: React.FC<SettingsPageProps> = async ({ params }) => {
             <SettingsForm initialData={store} />
 
         </div>
-        setting page
+        
 
     </div>
   )

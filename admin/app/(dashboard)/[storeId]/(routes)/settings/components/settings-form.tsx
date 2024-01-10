@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import Heading from "@/components/ui/heading";
 import { Separator } from "@/components/ui/separator";
@@ -8,6 +9,8 @@ import { Store } from "@prisma/client";
 import { Trash } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 
 interface SettingsFormProps {
   initialData: Store;
@@ -20,19 +23,51 @@ const formSchema = z.object({
 type SettingsFormValues = z.infer<typeof formSchema>;
 
 const SettingsForm: React.FC<SettingsFormProps> = ({ initialData }) => {
+  const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
   const form = useForm<SettingsFormValues>({
     defaultValues: initialData,
     resolver: zodResolver(formSchema),
   });
+
+  const onSubmit = async (data: SettingsFormValues) => {
+    console.log(data);
+  };
   return (
     <>
       <div className="flex items-center justify-between">
         <Heading title="Settings" description="Update your store settings" />
-        <Button variant="destructive" size="icon" onClick={() => {}}>
+        <Button disabled={loading} variant="destructive" size="icon" onClick={() => setOpen(true)}>
           <Trash className="h-4 w-4" />
         </Button>
       </div>
       <Separator />
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="space-y-8 w-full"
+        >
+          <div className="grid grid-cols-3 gap-8">
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Name</FormLabel>
+                  <FormControl>
+
+                  <Input {...field} disabled={loading} placeholder="Store Name" />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+          <Button disabled={loading} className="ml-auto" type="submit" >
+            Save Changes
+          </Button>
+        </form>
+      </Form>
     </>
   );
 };

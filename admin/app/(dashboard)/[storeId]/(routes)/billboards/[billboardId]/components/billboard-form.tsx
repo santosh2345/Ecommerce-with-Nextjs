@@ -102,6 +102,8 @@ const BillboardForm: React.FC<BillboardFormProps> = ({ initialData }) => {
       />
       <div className="flex items-center justify-between">
         <Heading title={title} description={description} />
+
+        {initialData && (
         <Button
           disabled={loading}
           variant="destructive"
@@ -110,6 +112,7 @@ const BillboardForm: React.FC<BillboardFormProps> = ({ initialData }) => {
         >
           <Trash className="h-4 w-4" />
         </Button>
+      )}
       </div>
       <Separator />
       <Form {...form}>
@@ -120,15 +123,15 @@ const BillboardForm: React.FC<BillboardFormProps> = ({ initialData }) => {
           <div className="grid grid-cols-3 gap-8">
             <FormField
               control={form.control}
-              name="name"
+              name="label"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Name</FormLabel>
+                  <FormLabel>Label</FormLabel>
                   <FormControl>
                     <Input
                       {...field}
                       disabled={loading}
-                      placeholder="Store Name"
+                      placeholder="Billboard label"
                     />
                   </FormControl>
                   <FormMessage />

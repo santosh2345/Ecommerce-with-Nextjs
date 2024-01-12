@@ -41,7 +41,7 @@ const ImageUpload:React.FC<ImageUploadProps> = ({
                     <img src={url} className="w-full h-full object-cover" />
                     <div className="absolute top-0 right-0">
                         <button onClick={()=>onRemove(url)} className="bg-red-500 text-white px-2 py-1 rounded-full">
-                            <i className="fa fa-trash"></i>
+                           
                         </button>
                     </div>
                 </div>

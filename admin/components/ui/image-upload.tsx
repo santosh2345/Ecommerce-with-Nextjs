@@ -53,7 +53,7 @@ const ImageUpload:React.FC<ImageUploadProps> = ({
                 />
                 <div className="absolute top-0 right-0">
                     <button className="bg-red-500 text-white px-2 py-1 rounded-full">
-                        <i className="fa fa-trash"></i>
+                        
                     </button>
                     </div>
 

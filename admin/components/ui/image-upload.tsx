@@ -2,6 +2,8 @@
 
 "use client"
 
+import { useEffect, useState } from "react";
+
 interface ImageUploadProps {
     disabled?: boolean;
     onChange: (value: string)=>void;
@@ -15,6 +17,21 @@ const ImageUpload:React.FC<ImageUploadProps> = ({
     onRemove,
     value,
 }) => {
+
+    const [isMounted, setIsMounted] = useState(false);
+
+    useEffect(()=>{
+        setIsMounted(true);
+    },[]);
+
+    if(!isMounted){
+        return null;
+    }
+
+    const onUPload = (result: any) =>{
+        onChange(result.info.secure_url);
+        
+    }
 
     return (
         <>

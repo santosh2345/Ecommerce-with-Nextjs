@@ -38,7 +38,7 @@ const ImageUpload:React.FC<ImageUploadProps> = ({
         <div className="flex flex-wrap">
             {value.map((url, index)=>(
                 <div key={index} className="relative w-32 h-32 mr-2 mb-2">
-                    <img src={url} className="w-full h-full object-cover" />
+                    
                     
                 </div>
             ))}

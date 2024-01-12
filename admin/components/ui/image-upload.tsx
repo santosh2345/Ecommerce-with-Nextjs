@@ -44,11 +44,7 @@ const ImageUpload:React.FC<ImageUploadProps> = ({
                     </div>
                 </div>
             ))}
-            <div className="relative w-32 h-32 mr-2 mb-2">
-                
-               
-                    
-                    </div>
+           
 
             </div>
 

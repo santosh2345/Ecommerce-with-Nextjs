@@ -48,6 +48,7 @@ const ImageUpload:React.FC<ImageUploadProps> = ({
             ))}
             <div className="w-1/2 p-2">
                 <div className="relative">
+                    <ImageUploadButton disabled={disabled} onUpload={onUPload} />
                     
                 </div>
             </div>

@@ -47,17 +47,10 @@ const ImageUpload:React.FC<ImageUploadProps> = ({
                 </div>
             ))}
             <div className="w-1/2 p-2">
-                <div className="relative">
-                    <div className="w-full h-32 bg-gray-200 flex items-center justify-center">
-                        <ImageUploadButton disabled={disabled} onUpload={onUPload} />
-                        <div className="absolute top-0 right-0">
-                            <button className="p-2 bg-red-500 text-white" onClick={()=>onRemove(item)}>X</button>
-                            </div>
-                            </div>
-                    
-                    
-                </div>
-            </div>
+                <ImagePicker
+                    disabled={disabled}
+                    onUpload={onUPload}
+                />
             </div>
         
         </>

@@ -52,6 +52,8 @@ const ImageUpload:React.FC<ImageUploadProps> = ({
                     onUpload={onUPload}
                 />
             </div>
+        </div>
+        
         
         </>
     )

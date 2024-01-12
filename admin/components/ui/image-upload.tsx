@@ -35,9 +35,24 @@ const ImageUpload:React.FC<ImageUploadProps> = ({
 
     return (
         <>
-        <div>
-            Image upload here
-        </div>
+        <div className="flex flex-wrap">
+            {value.map((item, index)=>(
+                <div key={index} className="w-1/2 p-2">
+                    <div className="relative">
+                        <img src={item} className="w-full" />
+                        <div className="absolute top-0 right-0">
+                            <button className="p-2 bg-red-500 text-white" onClick={()=>onRemove(item)}>X</button>
+                        </div>
+                    </div>
+                </div>
+            ))}
+            <div className="w-1/2 p-2">
+                <div className="relative">
+                    
+                </div>
+            </div>
+            </div>
+        
         </>
     )
 }

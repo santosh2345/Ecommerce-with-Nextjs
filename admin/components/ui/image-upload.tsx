@@ -47,10 +47,7 @@ const ImageUpload:React.FC<ImageUploadProps> = ({
                 </div>
             ))}
             <div className="relative w-32 h-32 mr-2 mb-2">
-                <ImageUploader
-                    disabled={disabled}
-                    onUpload={onUPload}
-                />
+                
                 <div className="absolute top-0 right-0">
                     
                     </div>

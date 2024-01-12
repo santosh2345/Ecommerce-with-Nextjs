@@ -36,7 +36,7 @@ const ImageUpload:React.FC<ImageUploadProps> = ({
     return (
         <>
         <div>
-            Image upload
+            Image upload here
         </div>
         </>
     )

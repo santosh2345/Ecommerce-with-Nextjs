@@ -2,6 +2,7 @@
 
 "use client"
 
+import { CldUploadWidget } from 'next-cloudinary';
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Trash } from "lucide-react";
@@ -59,11 +60,16 @@ const ImageUpload:React.FC<ImageUploadProps> = ({
 
             ))}
 
+
+
                 
            
            
 
             </div>
+            <CldUploadWidget>
+
+            </CldUploadWidget>
 
         
         </>

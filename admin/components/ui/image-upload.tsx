@@ -68,6 +68,9 @@ const ImageUpload:React.FC<ImageUploadProps> = ({
 
             </div>
             <CldUploadWidget>
+                <Button variant="primary" size="small" disabled={disabled}>
+                    Upload Image
+                </Button>
 
             </CldUploadWidget>
 

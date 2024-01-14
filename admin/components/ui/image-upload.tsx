@@ -69,7 +69,7 @@ const ImageUpload:React.FC<ImageUploadProps> = ({
             </div>
             <div className="mb-4">
                
-                <p className="text-sm text-gray-500">PNG, JPG, GIF up to 10MB</p>
+               
                 </div>
             <CldUploadWidget>
                 

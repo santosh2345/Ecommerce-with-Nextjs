@@ -70,7 +70,7 @@ const ImageUpload:React.FC<ImageUploadProps> = ({
             <div className="mb-4">
 
                 <p className="mb-2">Upload Image comming soon
-                <span className="text-sm text-gray-500"> (max 15 images)</span>
+                <span className="text-sm text-gray-500"> (max 15 images only)</span>
 
                  </p>
                 

@@ -69,7 +69,7 @@ const ImageUpload:React.FC<ImageUploadProps> = ({
             </div>
             <div className="mb-4">
 
-                <p className="mb-2">Upload Image soon comming</p>
+                <p className="mb-2">Upload Image comming soon </p>
                 
                
                

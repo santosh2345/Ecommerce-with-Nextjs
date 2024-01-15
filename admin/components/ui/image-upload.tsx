@@ -73,7 +73,7 @@ const ImageUpload:React.FC<ImageUploadProps> = ({
                 
                
                     
-            </CldUploadWidget>
+           
 
 
 

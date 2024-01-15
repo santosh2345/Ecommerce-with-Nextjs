@@ -70,12 +70,7 @@ const ImageUpload:React.FC<ImageUploadProps> = ({
             <div className="mb-4">
 
                 
-               
-               
-                
-               
-               
-                </div>
+            
             <CldUploadWidget>
                 
                

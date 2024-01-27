@@ -26,8 +26,6 @@ import ApiAlert from "@/components/ui/api-alert";
 import { useOrigin } from "@/hooks/use-origin";
 import ImageUpload from "@/components/ui/image-upload";
 
-
-
 const formSchema = z.object({
   label: z.string().min(1),
   imageUrl: z.string().min(1),
@@ -39,8 +37,6 @@ interface BillboardFormProps {
   initialData: Billboard | null;
 }
 
-
-
 const BillboardForm: React.FC<BillboardFormProps> = ({ initialData }) => {
   const params = useParams<{ storeId: string }>();
   const router = useRouter();
@@ -49,12 +45,10 @@ const BillboardForm: React.FC<BillboardFormProps> = ({ initialData }) => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
-
   const title = initialData ? "Edit Billboard" : "Create Billboard";
   const description = initialData ? "Edit a Billboard" : "Create a Billboard";
   const toastMessage = initialData ? "Billboard updated" : "Billboard created";
   const action = initialData ? "Save changes" : "Create";
-
 
   const form = useForm<BillboardFormValues>({
     resolver: zodResolver(formSchema),
@@ -105,15 +99,15 @@ const BillboardForm: React.FC<BillboardFormProps> = ({ initialData }) => {
         <Heading title={title} description={description} />
 
         {initialData && (
-        <Button
-          disabled={loading}
-          variant="destructive"
-          size="icon"
-          onClick={() => setOpen(true)}
-        >
-          <Trash className="h-4 w-4" />
-        </Button>
-      )}
+          <Button
+            disabled={loading}
+            variant="destructive"
+            size="icon"
+            onClick={() => setOpen(true)}
+          >
+            <Trash className="h-4 w-4" />
+          </Button>
+        )}
       </div>
       <Separator />
       <Form {...form}>
@@ -121,19 +115,23 @@ const BillboardForm: React.FC<BillboardFormProps> = ({ initialData }) => {
           onSubmit={form.handleSubmit(onSubmit)}
           className="space-y-8 w-full"
         >
-           <FormField
-              control={form.control}
-              name="imageUrl"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Background Image</FormLabel>
-                  <FormControl>
-                    <ImageUpload value={field.value ? [field.value] : []} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+          <FormField
+            control={form.control}
+            name="imageUrl"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Background Image</FormLabel>
+                <FormControl>
+                  <ImageUpload value={field.value ? [field.value] : []}
+                  disabled={loading}
+                  onChange={(url) => field.onChange(url)}
+                  onRemove={() => field.onChange("")}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
           <div className="grid grid-cols-3 gap-8">
             <FormField
               control={form.control}
@@ -154,12 +152,11 @@ const BillboardForm: React.FC<BillboardFormProps> = ({ initialData }) => {
             />
           </div>
           <Button disabled={loading} className="ml-auto" type="submit">
-           {action}
+            {action}
           </Button>
         </form>
       </Form>
       <Separator />
-      
     </>
   );
 };

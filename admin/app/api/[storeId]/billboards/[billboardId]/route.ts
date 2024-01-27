@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 
 export async function PATCH(
   req: Request,
-  { params }: { params: { storeId: string, billboardId: string } }
+  { params }: { params: { storeId: string; billboardId: string } }
 ) {
   try {
     const { userId } = auth();
@@ -19,19 +19,34 @@ export async function PATCH(
       return new NextResponse("Label is required", { status: 400 });
     }
     if (!imageUrl) {
-        return new NextResponse("Image URL is required", { status: 400 });
-      }
+      return new NextResponse("Image URL is required", { status: 400 });
+    }
     if (!params.storeId) {
-      return new NextResponse("Store ID is required", { status: 400 });
+      return new NextResponse("Store id is required", { status: 400 });
+    }
+    if (!params.billboardId) {
+      return new NextResponse("BIllboard id is required", { status: 400 });
     }
 
-    const store = await prismadb.store.updateMany({
+
+    const storeByUserId = await prismadb.store.findFirst({
+        where: {
+          id: params.storeId,
+          userId,
+        },
+      });
+  
+      if (!storeByUserId) {
+        return new NextResponse("Unauthorized", { status: 403 });
+      }
+
+    const billboard = await prismadb.billboard.updateMany({
       where: {
         id: params.storeId,
-        userId,
       },
       data: {
-        name,
+        label,
+        imageUrl,   
       },
     });
 

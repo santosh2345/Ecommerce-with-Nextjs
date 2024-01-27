@@ -61,13 +61,13 @@ const BillboardForm: React.FC<BillboardFormProps> = ({ initialData }) => {
   const onSubmit = async (data: BillboardFormValues) => {
     try {
       setLoading(true);
-      if(initialData) {
-
-      await axios.patch(`/api/${params.storeId}/billboards/${params.billboardId}`, data);
+      if (initialData) {
+        await axios.patch(
+          `/api/${params.storeId}/billboards/${params.billboardId}`,
+          data
+        );
       } else {
         await axios.post(`/api/${params.storeId}/billboards`, data);
-        
-
       }
       router.refresh();
       toast.success(toastMessage);
@@ -81,7 +81,9 @@ const BillboardForm: React.FC<BillboardFormProps> = ({ initialData }) => {
   const onDelete = async () => {
     try {
       setLoading(true);
-      await axios.delete(`/api/${params.storeId}/billboards/${params.billboardId}`);  
+      await axios.delete(
+        `/api/${params.storeId}/billboards/${params.billboardId}`
+      );
       router.refresh();
       router.push("/");
       toast.success("Billboard deleted");
@@ -129,10 +131,11 @@ const BillboardForm: React.FC<BillboardFormProps> = ({ initialData }) => {
               <FormItem>
                 <FormLabel>Background Image</FormLabel>
                 <FormControl>
-                  <ImageUpload value={field.value ? [field.value] : []}
-                  disabled={loading}
-                  onChange={(url) => field.onChange(url)}
-                  onRemove={() => field.onChange("")}
+                  <ImageUpload
+                    value={field.value ? [field.value] : []}
+                    disabled={loading}
+                    onChange={(url) => field.onChange(url)}
+                    onRemove={() => field.onChange("")}
                   />
                 </FormControl>
                 <FormMessage />

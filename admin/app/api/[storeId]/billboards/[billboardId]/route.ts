@@ -4,20 +4,23 @@ import { NextResponse } from "next/server";
 
 export async function PATCH(
   req: Request,
-  { params }: { params: { storeId: string } }
+  { params }: { params: { storeId: string, billboardId: string } }
 ) {
   try {
     const { userId } = auth();
 
     const body = await req.json();
-    const { name } = body;
+    const { label, imageUrl } = body;
 
     if (!userId) {
       return new NextResponse("Unauthenticated", { status: 401 });
     }
-    if (!name) {
-      return new NextResponse("Name is required", { status: 400 });
+    if (!label) {
+      return new NextResponse("Label is required", { status: 400 });
     }
+    if (!imageUrl) {
+        return new NextResponse("Image URL is required", { status: 400 });
+      }
     if (!params.storeId) {
       return new NextResponse("Store ID is required", { status: 400 });
     }

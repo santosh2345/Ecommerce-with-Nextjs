@@ -50,9 +50,9 @@ export async function PATCH(
       },
     });
 
-    return NextResponse.json(store);
+    return NextResponse.json(billboard);
   } catch (error) {
-    console.log("[STORE_PATCH]", error);
+    console.log("[BILLBOARD_PATCH]", error);
     return new NextResponse("Internal server error", { status: 500 });
   }
 }

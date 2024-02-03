@@ -1,5 +1,6 @@
 "use client";
 
+import { useParams, useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import {
   DropdownMenu,
@@ -11,6 +12,8 @@ import {
 import { BillboardColumn } from "./columns";
 import { Button } from "@/components/ui/button";
 import { Copy, Edit, MoreHorizontal, Trash } from "lucide-react";
+import axios from "axios";
+import { useState } from "react";
 
 interface CellActionProps {
   data: BillboardColumn;
@@ -18,11 +21,37 @@ interface CellActionProps {
 
 export const CellAction: React.FC<CellActionProps> = ({ data }) => {
 
+    const router = useRouter()
+    const params = useParams()
+
+    const [open, setOpen] = useState(false);
+    const [loading, setLoading] = useState(false);
+
+
 
     const onCopy = (id: string) =>{
         navigator.clipboard.writeText(id);
         toast.success("Billboard Id is copied to the clipboard!")
     }
+
+    const onDelete = async () => {
+        try {
+          setLoading(true);
+          await axios.delete(
+            `/api/${params.storeId}/billboards/${params.billboardId}`
+          );
+          router.refresh();
+          router.push("/");
+          toast.success("Billboard deleted");
+        } catch (error) {
+          toast.error(
+            "Make sure you removed all categories using this billboard first."
+          );
+        } finally {
+          setLoading(false);
+          setOpen(false);
+        }
+      };
 
   return (
     <DropdownMenu>
@@ -40,7 +69,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
             <Copy className="mr-2 h-4 w-4" />
             Copy Id
         </DropdownMenuItem>
-        <DropdownMenuItem>
+        <DropdownMenuItem onClick={()=> router.push(`/${params.storeId}/billboards/${data.id}`)}>
             <Edit className="mr-2 h-4 w-4" />
             Update
         </DropdownMenuItem>

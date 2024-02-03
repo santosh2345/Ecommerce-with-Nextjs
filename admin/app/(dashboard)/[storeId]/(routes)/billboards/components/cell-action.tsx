@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Copy, Edit, MoreHorizontal, Trash } from "lucide-react";
 import axios from "axios";
 import { useState } from "react";
+import { AlertModal } from "@/components/modals/alert-modal";
 
 interface CellActionProps {
   data: BillboardColumn;
@@ -38,10 +39,9 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
         try {
           setLoading(true);
           await axios.delete(
-            `/api/${params.storeId}/billboards/${params.billboardId}`
+            `/api/${params.storeId}/billboards/${data.id}`
           );
           router.refresh();
-          router.push("/");
           toast.success("Billboard deleted");
         } catch (error) {
           toast.error(
@@ -54,6 +54,8 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
       };
 
   return (
+    <>
+    <AlertModal isOpen={open} onClose={()=> setOpen(false)} onConfirm={onDelete} loading={loading} />
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button  variant="ghost" className="h-8 w-8 p-0">
@@ -73,12 +75,13 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
             <Edit className="mr-2 h-4 w-4" />
             Update
         </DropdownMenuItem>
-        <DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setOpen(true)}>
             <Trash className="mr-2 h-4 w-4" />
             Delete
         </DropdownMenuItem>
 
       </DropdownMenuContent>
     </DropdownMenu>
+    </>
   );
 };

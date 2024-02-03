@@ -1,6 +1,15 @@
 "use client"
 
-export const ApiList = () => {
+interface ApiListProps {
+    entityName: string;
+    entitiyIdName: string;
+}
+
+
+export const ApiList:React.FC<ApiListProps> = ({
+    entityName,
+    entitiyIdName
+}) => {
     return (
         <div>
         <h1>API List</h1>

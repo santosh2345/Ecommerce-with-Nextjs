@@ -2,6 +2,7 @@
 
 import { useOrigin } from "@/hooks/use-origin";
 import { useParams } from "next/navigation";
+import ApiAlert from "@/components/ui/api-alert";
 
 interface ApiListProps {
     entityName: string;
@@ -19,8 +20,8 @@ export const ApiList:React.FC<ApiListProps> = ({
 
     const baseUrl = `${origin}/api/${params.storeId}`
     return (
-        <div>
-        <h1>API List</h1>
-        </div>
+        <>
+        <ApiAlert />
+        </>
     )
     }

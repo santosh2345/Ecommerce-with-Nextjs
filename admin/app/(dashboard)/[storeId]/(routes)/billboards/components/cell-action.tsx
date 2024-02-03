@@ -1,5 +1,6 @@
 "use client";
 
+import toast from "react-hot-toast";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -16,6 +17,13 @@ interface CellActionProps {
 }
 
 export const CellAction: React.FC<CellActionProps> = ({ data }) => {
+
+
+    const onCopy = (id: string) =>{
+        navigator.clipboard.writeText(id);
+        toast.success("Billboard Id is copied to the clipboard!")
+    }
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -28,7 +36,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
         <DropdownMenuLabel>
             Actions
         </DropdownMenuLabel>
-        <DropdownMenuItem>
+        <DropdownMenuItem onClick={()=> onCopy(data.id)}>
             <Copy className="mr-2 h-4 w-4" />
             Copy Id
         </DropdownMenuItem>

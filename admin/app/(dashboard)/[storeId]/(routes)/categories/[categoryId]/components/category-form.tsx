@@ -144,7 +144,6 @@ const CategoryForm: React.FC<CategoryFormProps> = ({
                       {...field}
                       disabled={loading}
                       placeholder="Category Name"
-                      
                     />
                   </FormControl>
 
@@ -175,7 +174,7 @@ const CategoryForm: React.FC<CategoryFormProps> = ({
                     <SelectContent>
                       {billboards.map((billboard) => (
                         <SelectItem key={billboard.id} value={billboard.id}>
-                          {billboard.label} 
+                          {billboard.label}
                         </SelectItem>
                       ))}
                     </SelectContent>

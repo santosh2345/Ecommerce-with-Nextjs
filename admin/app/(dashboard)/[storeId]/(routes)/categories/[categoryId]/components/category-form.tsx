@@ -97,7 +97,7 @@ const CategoryForm: React.FC<CategoryFormProps> = ({
       toast.success("Category deleted");
     } catch (error) {
       toast.error(
-        "Make sure you removed all categories using this billboard first."
+        "Make sure you removed all products using this category first."
       );
     } finally {
       setLoading(false);

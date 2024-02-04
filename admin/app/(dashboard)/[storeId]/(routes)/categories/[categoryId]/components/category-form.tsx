@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import Heading from "@/components/ui/heading";
 import { Separator } from "@/components/ui/separator";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Billboard, Store } from "@prisma/client";
+import {  Category } from "@prisma/client";
 import { Trash } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { set, z } from "zod";
@@ -26,117 +26,49 @@ import { AlertModal } from "@/components/modals/alert-modal";
 import ImageUpload from "@/components/ui/image-upload";
 
 const formSchema = z.object({
-  label: z.string().min(1),
-  imageUrl: z.string().min(1),
+  name: z.string().min(1),
+  billboardId: z.string().min(1),
 });
 
-type BillboardFormValues = z.infer<typeof formSchema>;
+type CategoryFormValues = z.infer<typeof formSchema>;
 
-interface BillboardFormProps {
-  initialData: Billboard | null;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
+interface CategoryFormProps {
+  initialData: Category | null; 
 }
 
-const BillboardForm: React.FC<BillboardFormProps> = ({ initialData }) => {
+const CategoryForm: React.FC<CategoryFormProps> = ({ initialData }) => {
   const params = useParams();
   const router = useRouter();
 
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const title = initialData ? "Edit Billboard" : "Create Billboard";
-  const description = initialData ? "Edit a Billboard" : "Create a Billboard";
-  const toastMessage = initialData ? "Billboard updated" : "Billboard created";
+  const title = initialData ? "Edit category" : "Create category";
+  const description = initialData ? "Edit a category" : "Create a category";
+  const toastMessage = initialData ? "Category updated" : "Category created";
   const action = initialData ? "Save changes" : "Create";
 
-  const form = useForm<BillboardFormValues>({
+  const form = useForm<CategoryFormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: initialData || {
-      label: "",
-      imageUrl: "",
+      name: "",
+      billboardId: "",
     },
   });
 
-  const onSubmit = async (data: BillboardFormValues) => {
+  const onSubmit = async (data: CategoryFormValues) => {
     try {
       setLoading(true);
       if (initialData) {
         await axios.patch(
-          `/api/${params.storeId}/billboards/${params.billboardId}`,
+          `/api/${params.storeId}/categories/${params.categoryId}`,
           data
         );
       } else {
-        await axios.post(`/api/${params.storeId}/billboards`, data);
+        await axios.post(`/api/${params.storeId}/categories`, data);
       }
       router.refresh();
-      router.push(`/${params.storeId}/billboards`);
+      router.push(`/${params.storeId}/categories`);
       toast.success(toastMessage);
     } catch (error) {
       toast.error("Something went wrong");
@@ -238,4 +170,4 @@ const BillboardForm: React.FC<BillboardFormProps> = ({ initialData }) => {
   );
 };
 
-export default BillboardForm;
+export default CategoryForm;

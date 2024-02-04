@@ -22,7 +22,7 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import { useParams, useRouter } from "next/navigation";
 import { AlertModal } from "@/components/modals/alert-modal";
-import { Select } from "@/components/ui/select";
+import { Select, SelectTrigger } from "@/components/ui/select";
 
 const formSchema = z.object({
   name: z.string().min(1),
@@ -152,7 +152,15 @@ const CategoryForm: React.FC<CategoryFormProps> = ({ initialData }) => {
                     onValueChange={field.onChange}
                     value={field.value}
                     defaultValue={field.value}
-                  ></Select>
+                  >
+
+                    <FormControl>
+                      <SelectTrigger defaultValue={field.value} placeholder="Select a billboard" >
+                        
+
+                      </SelectTrigger>
+                    </FormControl>
+                  </Select>
 
                   <FormMessage />
                 </FormItem>

@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import Heading from "@/components/ui/heading";
 import { Separator } from "@/components/ui/separator";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Category } from "@prisma/client";
+import { Billboard, Category } from "@prisma/client";
 import { Trash } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { set, z } from "zod";
@@ -22,7 +22,13 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import { useParams, useRouter } from "next/navigation";
 import { AlertModal } from "@/components/modals/alert-modal";
-import { Select, SelectTrigger } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const formSchema = z.object({
   name: z.string().min(1),
@@ -32,10 +38,14 @@ const formSchema = z.object({
 type CategoryFormValues = z.infer<typeof formSchema>;
 
 interface CategoryFormProps {
+  billboards: Billboard[];
   initialData: Category | null;
 }
 
-const CategoryForm: React.FC<CategoryFormProps> = ({ initialData }) => {
+const CategoryForm: React.FC<CategoryFormProps> = ({
+  billboards,
+  initialData,
+}) => {
   const params = useParams();
   const router = useRouter();
 
@@ -134,6 +144,7 @@ const CategoryForm: React.FC<CategoryFormProps> = ({ initialData }) => {
                       {...field}
                       disabled={loading}
                       placeholder="Category Name"
+                      
                     />
                   </FormControl>
 
@@ -153,13 +164,21 @@ const CategoryForm: React.FC<CategoryFormProps> = ({ initialData }) => {
                     value={field.value}
                     defaultValue={field.value}
                   >
-
                     <FormControl>
-                      <SelectTrigger defaultValue={field.value} placeholder="Select a billboard" >
-                        
-
+                      <SelectTrigger>
+                        <SelectValue
+                          defaultValue={field.value}
+                          placeholder="Select a billboard"
+                        />
                       </SelectTrigger>
                     </FormControl>
+                    <SelectContent>
+                      {billboards.map((billboard) => (
+                        <SelectItem key={billboard.id} value={billboard.id}>
+                          {billboard.label} hello
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
                   </Select>
 
                   <FormMessage />

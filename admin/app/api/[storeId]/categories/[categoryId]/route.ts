@@ -4,28 +4,28 @@ import { NextResponse } from "next/server";
 
 export async function GET(
   req: Request,
-  { params }: { params: { billboardId: string } }
+  { params }: { params: { categoryId: string } }
 ) {
   try {
-    if (!params.billboardId) {
-      return new NextResponse("Store ID is required", { status: 400 });
+    if (!params.categoryId) {
+      return new NextResponse("Category ID is required", { status: 400 });
     }
-    const billboard = await prismadb.billboard.findUnique({
+    const category = await prismadb.category.findUnique({
       where: {
-        id: params.billboardId,
+        id: params.categoryId,
       },
     });
 
-    return NextResponse.json(billboard);
+    return NextResponse.json(category);
   } catch (error) {
-    console.log("[BILLBOARD_GET]", error);
+    console.log("[CATEGORY_GET]", error);
     return new NextResponse("Internal server error", { status: 500 });
   }
 }
 
 export async function PATCH(
   req: Request,
-  { params }: { params: { storeId: string; billboardId: string } }
+  { params }: { params: { storeId: string; categoryId: string } }
 ) {
   try {
     const { userId } = auth();
@@ -45,7 +45,7 @@ export async function PATCH(
     if (!params.storeId) {
       return new NextResponse("Store id is required", { status: 400 });
     }
-    if (!params.billboardId) {
+    if (!params.categoryId) {
       return new NextResponse("BIllboard id is required", { status: 400 });
     }
 

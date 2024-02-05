@@ -56,6 +56,6 @@ model Size {
   createdAt DateTime @default(now())
  updatedAt   DateTime  @updatedAt
 
- @@index([storeId])
+ @@index([storeId]) 
 
 }

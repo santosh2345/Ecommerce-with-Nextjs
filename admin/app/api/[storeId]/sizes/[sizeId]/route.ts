@@ -31,22 +31,22 @@ export async function PATCH(
     const { userId } = auth();
 
     const body = await req.json();
-    const { label, imageUrl } = body;
+    const { name, value } = body;
 
     if (!userId) {
       return new NextResponse("Unauthenticated", { status: 401 });
     }
-    if (!label) {
-      return new NextResponse("Label is required", { status: 400 });
+    if (!name) {
+      return new NextResponse("Name is required", { status: 400 });
     }
-    if (!imageUrl) {
-      return new NextResponse("Image URL is required", { status: 400 });
+    if (!value) {
+      return new NextResponse("Value is required", { status: 400 });
     }
     if (!params.storeId) {
       return new NextResponse("Store id is required", { status: 400 });
     }
     if (!params.sizeId) {
-      return new NextResponse("BIllboard id is required", { status: 400 });
+      return new NextResponse("Size id is required", { status: 400 });
     }
 
     const storeByUserId = await prismadb.store.findFirst({
@@ -60,19 +60,19 @@ export async function PATCH(
       return new NextResponse("Unauthorized", { status: 403 });
     }
 
-    const billboard = await prismadb.billboard.updateMany({
+    const size = await prismadb.size.updateMany({
       where: {
         id: params.sizeId,
       },
       data: {
-        label,
-        imageUrl,
+        name,
+        value,
       },
     });
 
-    return NextResponse.json(billboard);
+    return NextResponse.json(size);
   } catch (error) {
-    console.log("[BILLBOARD_PATCH]", error);
+    console.log("[SIZE_PATCH]", error);
     return new NextResponse("Internal server error", { status: 500 });
   }
 }

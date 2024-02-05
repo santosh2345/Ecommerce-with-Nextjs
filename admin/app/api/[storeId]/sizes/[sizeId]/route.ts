@@ -4,15 +4,15 @@ import { NextResponse } from "next/server";
 
 export async function GET(
   req: Request,
-  { params }: { params: { billboardId: string } }
+  { params }: { params: { sizeId: string } }
 ) {
   try {
-    if (!params.billboardId) {
+    if (!params.sizeId) {
       return new NextResponse("Billboard ID is required", { status: 400 });
     }
     const billboard = await prismadb.billboard.findUnique({
       where: {
-        id: params.billboardId,
+        id: params.sizeId,
       },
     });
 
@@ -25,7 +25,7 @@ export async function GET(
 
 export async function PATCH(
   req: Request,
-  { params }: { params: { storeId: string; billboardId: string } }
+  { params }: { params: { storeId: string; sizeId: string } }
 ) {
   try {
     const { userId } = auth();
@@ -45,7 +45,7 @@ export async function PATCH(
     if (!params.storeId) {
       return new NextResponse("Store id is required", { status: 400 });
     }
-    if (!params.billboardId) {
+    if (!params.sizeId) {
       return new NextResponse("BIllboard id is required", { status: 400 });
     }
 
@@ -62,7 +62,7 @@ export async function PATCH(
 
     const billboard = await prismadb.billboard.updateMany({
       where: {
-        id: params.billboardId,
+        id: params.sizeId,
       },
       data: {
         label,
@@ -79,7 +79,7 @@ export async function PATCH(
 
 export async function DELETE(
   req: Request,
-  { params }: { params: { storeId: string; billboardId: string } }
+  { params }: { params: { storeId: string; sizeId: string } }
 ) {
   try {
     const { userId } = auth();
@@ -88,7 +88,7 @@ export async function DELETE(
       return new NextResponse("Unauthenticated", { status: 401 });
     }
 
-    if (!params.billboardId) {
+    if (!params.sizeId) {
       return new NextResponse("Billboard ID is required", { status: 400 });
     }
 
@@ -105,7 +105,7 @@ export async function DELETE(
 
     const billboard = await prismadb.billboard.deleteMany({
       where: {
-        id: params.billboardId,
+        id: params.sizeId,
       },
     });
 

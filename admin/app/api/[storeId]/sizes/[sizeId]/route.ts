@@ -108,7 +108,7 @@ export async function DELETE(
 
     const size = await prismadb.size.deleteMany({
       where: {
-        id: params.sizeId,
+        id: params.sizeId,s
       },
     });
 

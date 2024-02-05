@@ -1,5 +1,5 @@
 import prismadb from "@/lib/prismadb";
-import BillboardForm from "./components/billboard-form";
+import SizeForm from "./components/billboard-form";
 
 const SizePage = async ({
   params,
@@ -15,7 +15,7 @@ const SizePage = async ({
   return (
     <div className="flex-col">
       <div className="flex-1 space-y-4 p-8 pt-6">
-      <BillboardForm  initialData={size}/>
+      <SizeForm  initialData={size}/>
       </div>
      
     </div>

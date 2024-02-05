@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import Heading from "@/components/ui/heading";
 import { Separator } from "@/components/ui/separator";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Billboard, Store } from "@prisma/client";
+import {Size} from "@prisma/client";
 import { Trash } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { set, z } from "zod";
@@ -26,17 +26,17 @@ import { AlertModal } from "@/components/modals/alert-modal";
 import ImageUpload from "@/components/ui/image-upload";
 
 const formSchema = z.object({
-  label: z.string().min(1),
-  imageUrl: z.string().min(1),
+  name: z.string().min(1),
+  value: z.string().min(1),
 });
 
-type BillboardFormValues = z.infer<typeof formSchema>;
+type SizeFormValues = z.infer<typeof formSchema>;
 
-interface BillboardFormProps {
-  initialData: Billboard | null;
+interface SizeFormProps {
+  initialData: Size | null;
 }
 
-const BillboardForm: React.FC<BillboardFormProps> = ({ initialData }) => {
+const SizeForm: React.FC<SizeFormProps> = ({ initialData }) => {
   const params = useParams();
   const router = useRouter();
 
@@ -48,7 +48,7 @@ const BillboardForm: React.FC<BillboardFormProps> = ({ initialData }) => {
   const toastMessage = initialData ? "Billboard updated" : "Billboard created";
   const action = initialData ? "Save changes" : "Create";
 
-  const form = useForm<BillboardFormValues>({
+  const form = useForm<SizeFormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: initialData || {
       label: "",
@@ -56,7 +56,7 @@ const BillboardForm: React.FC<BillboardFormProps> = ({ initialData }) => {
     },
   });
 
-  const onSubmit = async (data: BillboardFormValues) => {
+  const onSubmit = async (data: SizeFormValues) => {
     try {
       setLoading(true);
       if (initialData) {
@@ -170,4 +170,4 @@ const BillboardForm: React.FC<BillboardFormProps> = ({ initialData }) => {
   );
 };
 
-export default BillboardForm;
+export default SizeForm;

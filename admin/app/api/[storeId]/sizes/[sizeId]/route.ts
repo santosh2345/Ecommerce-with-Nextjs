@@ -8,17 +8,17 @@ export async function GET(
 ) {
   try {
     if (!params.sizeId) {
-      return new NextResponse("Billboard ID is required", { status: 400 });
+      return new NextResponse("Size ID is required", { status: 400 });
     }
-    const billboard = await prismadb.billboard.findUnique({
+    const size = await prismadb.size.findUnique({
       where: {
         id: params.sizeId,
       },
     });
 
-    return NextResponse.json(billboard);
+    return NextResponse.json(size);
   } catch (error) {
-    console.log("[BILLBOARD_GET]", error);
+    console.log("[SIZE_GET]", error);
     return new NextResponse("Internal server error", { status: 500 });
   }
 }

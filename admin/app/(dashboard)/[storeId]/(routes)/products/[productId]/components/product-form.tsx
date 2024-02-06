@@ -32,8 +32,8 @@ const formSchema = z.object({
   categoryId: z.string().min(1),
   colorId: z.string().min(1),
   sizeId: z.string().min(1),
-  isFeatured: z.boolean().default(false),
-  isArchived: z.boolean().default(false),
+  isFeatured: z.boolean().default(false).optional(),
+  isArchived: z.boolean().default(false).optional(),
 
 });
 
@@ -59,7 +59,10 @@ const ProductForm: React.FC<ProductFormProps> = ({ initialData }) => {
 
   const form = useForm<ProductFormValues>({
     resolver: zodResolver(formSchema),
-    defaultValues: initialData || {
+    defaultValues: initialData ? {
+      ...initialData,
+      price: parseFloat(String(initialData?.price)),
+    } : {
       name: "",
       images: [],
       price: 0,

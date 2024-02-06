@@ -2,7 +2,7 @@ import { format } from "date-fns";
 import { BillboardClient } from "./components/client";
 import prismadb from "@/lib/prismadb";
 import { formatter } from "@/lib/utils";
-import { BillboardColumn } from "./components/columns";
+import { ProductColumn } from "./components/columns";
 
 const ProductsPage = async ({ params }: { params: { storeId: string } }) => {
   const products = await prismadb.product.findMany({
@@ -19,7 +19,7 @@ const ProductsPage = async ({ params }: { params: { storeId: string } }) => {
     },
   });
 
-  const formattedProducts: BillboardColumn[] = products.map((product) => ({
+  const formattedProducts: ProductColumn[] = products.map((product) => ({
     id: product.id,
     name: product.name,
     isFeatured: product.isFeatured,

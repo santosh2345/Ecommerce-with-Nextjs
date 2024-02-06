@@ -39,7 +39,7 @@ export async function POST(
     }
 
     // Check if the color already exists
-    const size = await prismadb.color.create({
+    const color = await prismadb.color.create({
       data: {
         name,
         value,
@@ -47,9 +47,9 @@ export async function POST(
       },
     });
 
-    return NextResponse.json(size);
+    return NextResponse.json(color);
   } catch (error) {
-    console.log("[SIZE_POST", error);
+    console.log("[COLOR_POST", error);
     return new NextResponse("Internal server error", { status: 500 });
   }
 }
@@ -63,15 +63,15 @@ export async function GET(
       return new NextResponse("Store id is required", { status: 400 });
     }
 
-    const size = await prismadb.size.findMany({
+    const color = await prismadb.color.findMany({
       where: {
         storeId: params.storeId,
       },
     });
 
-    return NextResponse.json(size);
+    return NextResponse.json(color);
   } catch (error) {
-    console.log("[SIZE_POST", error);
+    console.log("[COLOR_POST", error);
     return new NextResponse("Internal server error", { status: 500 });
   }
 }

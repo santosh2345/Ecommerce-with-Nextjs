@@ -2,7 +2,7 @@ import prismadb from "@/lib/prismadb";
 import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 
-// Path: admin/app/api/%5BstoreId%5D/sizes/route.ts
+// Path: admin/app/api/%5BstoreId%5D/colors/route.ts
 export async function POST(
   req: Request,
   { params }: { params: { storeId: string } }

@@ -47,9 +47,10 @@ export async function PATCH(
       return new NextResponse("Store id is required", { status: 400 });
     }
     if (!params.colorId) {
-      return new NextResponse("Size id is required", { status: 400 });
+      return new NextResponse("Color id is required", { status: 400 });
     }
 
+    // Check if the store exists and checking for authorizations
     const storeByUserId = await prismadb.store.findFirst({
       where: {
         id: params.storeId,
@@ -62,7 +63,7 @@ export async function PATCH(
     }
 
     // Update the size
-    const size = await prismadb.size.updateMany({
+    const color = await prismadb.color.updateMany({
       where: {
         id: params.colorId,
       },
@@ -72,9 +73,9 @@ export async function PATCH(
       },
     });
 
-    return NextResponse.json(size);
+    return NextResponse.json(color);
   } catch (error) {
-    console.log("[SIZE_PATCH]", error);
+    console.log("[COLOR_PATCH]", error);
     return new NextResponse("Internal server error", { status: 500 });
   }
 }

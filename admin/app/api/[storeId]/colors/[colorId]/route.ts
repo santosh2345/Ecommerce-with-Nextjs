@@ -8,7 +8,7 @@ export async function GET(
 ) {
   try {
     if (!params.colorId) {
-      return new NextResponse("Size ID is required", { status: 400 });
+      return new NextResponse("Color ID is required", { status: 400 });
     }
     const color = await prismadb.color.findUnique({
       where: {
@@ -23,7 +23,7 @@ export async function GET(
   }
 }
 
-// Path: admin/app/api/%5BstoreId%5D/sizes/%5BcolorId%5D/route.ts
+// Path: admin/app/api/%5BstoreId%5D/colors/%5BcolorId%5D/route.ts
 export async function PATCH(
   req: Request,
   { params }: { params: { storeId: string; colorId: string } }
@@ -80,7 +80,7 @@ export async function PATCH(
   }
 }
 
-// Path: admin/app/api/%5BstoreId%5D/sizes/%5BcolorId%5D/route.ts
+// Path: admin/app/api/%5BstoreId%5D/colors/%5BcolorId%5D/route.ts
 export async function DELETE(
   req: Request,
   { params }: { params: { storeId: string; colorId: string } }

@@ -42,7 +42,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
             `/api/${params.storeId}/colors/${data.id}`
           );
           router.refresh();
-          toast.success("Size deleted");
+          toast.success("Color deleted");
         } catch (error) {
           toast.error(
             "Make sure you removed all products using this color first."
@@ -71,7 +71,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
             <Copy className="mr-2 h-4 w-4" />
             Copy Id
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={()=> router.push(`/${params.storeId}/sizes/${data.id}`)}>
+        <DropdownMenuItem onClick={()=> router.push(`/${params.storeId}/colors/${data.id}`)}>
             <Edit className="mr-2 h-4 w-4" />
             Update
         </DropdownMenuItem>

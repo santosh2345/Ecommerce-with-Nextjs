@@ -116,7 +116,7 @@ export async function DELETE(
 
     return NextResponse.json(color);
   } catch (error) {
-    console.log("[SIZE_DELETE]", error);
+    console.log("[COLOR_DELETE]", error);
     return new NextResponse("Internal server error", { status: 500 });
   }
 }

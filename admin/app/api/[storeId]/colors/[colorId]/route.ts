@@ -4,15 +4,15 @@ import { NextResponse } from "next/server";
 
 export async function GET(
   req: Request,
-  { params }: { params: { sizeId: string } }
+  { params }: { params: { colorId: string } }
 ) {
   try {
-    if (!params.sizeId) {
+    if (!params.colorId) {
       return new NextResponse("Size ID is required", { status: 400 });
     }
     const size = await prismadb.size.findUnique({
       where: {
-        id: params.sizeId,
+        id: params.colorId,
       },
     });
 
@@ -23,10 +23,10 @@ export async function GET(
   }
 }
 
-// Path: admin/app/api/%5BstoreId%5D/sizes/%5BsizeId%5D/route.ts
+// Path: admin/app/api/%5BstoreId%5D/sizes/%5BcolorId%5D/route.ts
 export async function PATCH(
   req: Request,
-  { params }: { params: { storeId: string; sizeId: string } }
+  { params }: { params: { storeId: string; colorId: string } }
 ) {
   try {
     const { userId } = auth();
@@ -46,7 +46,7 @@ export async function PATCH(
     if (!params.storeId) {
       return new NextResponse("Store id is required", { status: 400 });
     }
-    if (!params.sizeId) {
+    if (!params.colorId) {
       return new NextResponse("Size id is required", { status: 400 });
     }
 
@@ -64,7 +64,7 @@ export async function PATCH(
     // Update the size
     const size = await prismadb.size.updateMany({
       where: {
-        id: params.sizeId,
+        id: params.colorId,
       },
       data: {
         name,
@@ -79,10 +79,10 @@ export async function PATCH(
   }
 }
 
-// Path: admin/app/api/%5BstoreId%5D/sizes/%5BsizeId%5D/route.ts
+// Path: admin/app/api/%5BstoreId%5D/sizes/%5BcolorId%5D/route.ts
 export async function DELETE(
   req: Request,
-  { params }: { params: { storeId: string; sizeId: string } }
+  { params }: { params: { storeId: string; colorId: string } }
 ) {
   try {
     const { userId } = auth();
@@ -91,7 +91,7 @@ export async function DELETE(
       return new NextResponse("Unauthenticated", { status: 401 });
     }
 
-    if (!params.sizeId) {
+    if (!params.colorId) {
       return new NextResponse("Size ID is required", { status: 400 });
     }
 
@@ -108,7 +108,7 @@ export async function DELETE(
 
     const size = await prismadb.size.deleteMany({
       where: {
-        id: params.sizeId,s
+        id: params.colorId,s
       },
     });
 

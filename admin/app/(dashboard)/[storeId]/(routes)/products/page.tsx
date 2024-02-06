@@ -1,6 +1,7 @@
-import {format} from "date-fns";
+import { format } from "date-fns";
 import { BillboardClient } from "./components/client";
 import prismadb from "@/lib/prismadb";
+import { formatter } from "@/lib/utils";
 import { BillboardColumn } from "./components/columns";
 
 const ProductsPage = async ({ params }: { params: { storeId: string } }) => {
@@ -12,23 +13,20 @@ const ProductsPage = async ({ params }: { params: { storeId: string } }) => {
       category: true,
       size: true,
       color: true,
-
     },
     orderBy: {
       createdAt: "desc",
     },
   });
 
-  const formattedProducts: BillboardColumn[] = products.map(
-    (product) => ({
-      id: product.id,
-      name: product.name,
-      isFeatured: product.isFeatured,
-      isArchived: product.isArchived,
-      price: product.price,
-      createdAt: format(product.createdAt, "MMMM do, yyyy"),
-    })
-  );
+  const formattedProducts: BillboardColumn[] = products.map((product) => ({
+    id: product.id,
+    name: product.name,
+    isFeatured: product.isFeatured,
+    isArchived: product.isArchived,
+    price: formatter.format(product.price.toNumber()),
+    createdAt: format(product.createdAt, "MMMM do, yyyy"),
+  }));
 
   return (
     <div className="flex-col">

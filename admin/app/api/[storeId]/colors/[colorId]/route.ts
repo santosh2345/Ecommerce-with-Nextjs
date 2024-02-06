@@ -10,15 +10,15 @@ export async function GET(
     if (!params.colorId) {
       return new NextResponse("Size ID is required", { status: 400 });
     }
-    const size = await prismadb.size.findUnique({
+    const color = await prismadb.color.findUnique({
       where: {
         id: params.colorId,
       },
     });
 
-    return NextResponse.json(size);
+    return NextResponse.json(color);
   } catch (error) {
-    console.log("[SIZE_GET]", error);
+    console.log("[COLOR_GET]", error);
     return new NextResponse("Internal server error", { status: 500 });
   }
 }

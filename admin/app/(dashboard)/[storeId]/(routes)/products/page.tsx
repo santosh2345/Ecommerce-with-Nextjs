@@ -40,4 +40,4 @@ const ProductsPage = async ({ params }: { params: { storeId: string } }) => {
   );
 };
 
-export default Billboards;
+export default ProductsPage;

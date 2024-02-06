@@ -62,7 +62,7 @@ export async function PATCH(
       return new NextResponse("Unauthorized", { status: 403 });
     }
 
-    // Update the size
+    // Update the color
     const color = await prismadb.color.updateMany({
       where: {
         id: params.colorId,
@@ -93,9 +93,10 @@ export async function DELETE(
     }
 
     if (!params.colorId) {
-      return new NextResponse("Size ID is required", { status: 400 });
+      return new NextResponse("Color ID is required", { status: 400 });
     }
 
+    // Check if the store exists and checking for authorizations
     const storeByUserId = await prismadb.store.findFirst({
       where: {
         id: params.storeId,
@@ -107,13 +108,13 @@ export async function DELETE(
       return new NextResponse("Unauthorized", { status: 403 });
     }
 
-    const size = await prismadb.size.deleteMany({
+    const color = await prismadb.color.deleteMany({
       where: {
-        id: params.colorId,s
+        id: params.colorId,
       },
     });
 
-    return NextResponse.json(size);
+    return NextResponse.json(color);
   } catch (error) {
     console.log("[SIZE_DELETE]", error);
     return new NextResponse("Internal server error", { status: 500 });

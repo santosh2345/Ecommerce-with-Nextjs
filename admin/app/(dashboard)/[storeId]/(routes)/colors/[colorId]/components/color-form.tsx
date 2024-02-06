@@ -90,7 +90,7 @@ const ColorForm: React.FC<ColorFormProps> = ({ initialData }) => {
       toast.success("Color deleted");
     } catch (error) {
       toast.error(
-        "Make sure you removed all categories using this size first."
+        "Make sure you removed all categories using this color first."
       );
     } finally {
       setLoading(false);
@@ -137,7 +137,7 @@ const ColorForm: React.FC<ColorFormProps> = ({ initialData }) => {
                     <Input
                       {...field}
                       disabled={loading}
-                      placeholder="Size name"
+                      placeholder="Color name"
                     />
                   </FormControl>
 
@@ -152,11 +152,18 @@ const ColorForm: React.FC<ColorFormProps> = ({ initialData }) => {
                 <FormItem>
                   <FormLabel>Value</FormLabel>
                   <FormControl>
+
+                    <div className="flex items-center gap-x-4">
+
                     <Input
                       {...field}
                       disabled={loading}
-                      placeholder="Size value"
+                      placeholder="Color value"
                     />
+                    <div
+                    className="border p-4 rounded-full"
+                      style={{ backgroundColor: field.value }} />
+                      </div>
                   </FormControl>
 
                   <FormMessage />

@@ -331,8 +331,12 @@ const ProductForm: React.FC<ProductFormProps> = ({
                 checked={field.value}
                 onCheckedChange={field.onChange}
                 />
+                
 
-                </FormControl>  
+                </FormControl> 
+                <div className="space-y-1 leading-none">
+                  
+                  </div> 
              
                 </FormItem>
               )}

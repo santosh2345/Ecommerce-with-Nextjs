@@ -12,6 +12,7 @@ import { set, z } from "zod";
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -335,7 +336,11 @@ const ProductForm: React.FC<ProductFormProps> = ({
 
                 </FormControl> 
                 <div className="space-y-1 leading-none">
-                  
+                <FormLabel>Featured</FormLabel>
+                  <FormDescription>
+                    This product will be featured on the store's homepage
+                  </FormDescription>
+
                   </div> 
              
                 </FormItem>

@@ -42,7 +42,7 @@ export async function POST(
       return new NextResponse("Color is required", { status: 400 });
     }
     if (!images || !images.length) { // here we check if images is an array and if it has at least one element
-      return new NextResponse("Image URL is required", { status: 400 });
+      return new NextResponse("Images are required", { status: 400 });
     }
 
     if (!params.storeId) {
@@ -60,7 +60,7 @@ export async function POST(
       return new NextResponse("Unauthorized", { status: 403 });
     }
 
-    const billboard = await prismadb.billboard.create({
+    const product = await prismadb.product.create({
       data: {
         label,
         imageUrl,
@@ -68,9 +68,9 @@ export async function POST(
       },
     });
 
-    return NextResponse.json(billboard);
+    return NextResponse.json(product);
   } catch (error) {
-    console.log("[BILLBOARD_POST", error);
+    console.log("[PRODUCT_POST", error);
     return new NextResponse("Internal server error", { status: 500 });
   }
 }

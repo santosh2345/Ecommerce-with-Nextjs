@@ -37,10 +37,11 @@ export async function POST(
     }
     if (!categoryId) {
       return new NextResponse("Category is required", { status: 400 });
-    } if (!colorId) {
+    }
+    if (!colorId) {
       return new NextResponse("Color is required", { status: 400 });
     }
-    if (!images) {
+    if (!images || !images.length) { // here we check if images is an array and if it has at least one element
       return new NextResponse("Image URL is required", { status: 400 });
     }
 

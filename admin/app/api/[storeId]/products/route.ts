@@ -23,10 +23,24 @@ export async function POST(
     if (!userId) {
       return new NextResponse("Unauthenticated", { status: 401 });
     }
-    if (!label) {
-      return new NextResponse("Label is required", { status: 400 });
+    if (!name) {
+      return new NextResponse("Name is required", { status: 400 });
     }
-    if (!imageUrl) {
+    if (!sizeId) {
+      return new NextResponse("Name is required", { status: 400 });
+    }
+    if (!price) {
+      return new NextResponse("Price is required", { status: 400 });
+    }
+    if (!colorId) {
+      return new NextResponse("Color is required", { status: 400 });
+    }
+    if (!categoryId) {
+      return new NextResponse("Category is required", { status: 400 });
+    } if (!colorId) {
+      return new NextResponse("Color is required", { status: 400 });
+    }
+    if (!images) {
       return new NextResponse("Image URL is required", { status: 400 });
     }
 

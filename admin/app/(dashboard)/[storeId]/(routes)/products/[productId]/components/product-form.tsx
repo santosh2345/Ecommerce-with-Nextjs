@@ -310,7 +310,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
                     <SelectContent>
                       {colors.map((color) => (
                         <SelectItem key={color.id} value={color.id}>
-                          {color.name} don
+                          {color.name} 
                         </SelectItem>
                       ))}
                     </SelectContent>

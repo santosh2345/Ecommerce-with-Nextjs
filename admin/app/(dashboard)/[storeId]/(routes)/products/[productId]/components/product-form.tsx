@@ -362,7 +362,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
                 <div className="space-y-1 leading-none">
                 <FormLabel>Archived</FormLabel>
                   <FormDescription>
-                    This product will be featured on the store's homepage
+                    This product will not appear anywhere in the store
                   </FormDescription>
 
                   </div> 

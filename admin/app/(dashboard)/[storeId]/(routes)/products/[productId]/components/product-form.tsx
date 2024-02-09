@@ -126,7 +126,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
       toast.success("Product deleted");
     } catch (error) {
       toast.error(
-        "Something went 9"
+        "Something went 10"
       );
     } finally {
       setLoading(false);

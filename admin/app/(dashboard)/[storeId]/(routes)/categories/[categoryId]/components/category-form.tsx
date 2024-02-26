@@ -132,7 +132,6 @@ const CategoryForm: React.FC<CategoryFormProps> = ({
           onSubmit={form.handleSubmit(onSubmit)}
           className="space-y-8 w-full"
         >
-          <div className="grid grid-cols-3 gap-8">
             <FormField
               control={form.control}
               name="name"
@@ -184,12 +183,12 @@ const CategoryForm: React.FC<CategoryFormProps> = ({
                 </FormItem>
               )}
             />
-          </div>
           <Button disabled={loading} className="ml-auto" type="submit">
             {action}
           </Button>
         </form>
       </Form>
+          
     </>
   );
 };

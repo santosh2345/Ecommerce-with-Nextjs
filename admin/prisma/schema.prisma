@@ -7,7 +7,7 @@ datasource db {
   url          = env("DATABASE_URL")
   relationMode = "prisma"
 }
-ab
+a
 model Store {
   id         String      @id @default(uuid())
   name       String

@@ -41,7 +41,8 @@ export async function POST(
     if (!colorId) {
       return new NextResponse("Color is required", { status: 400 });
     }
-    if (!images || !images.length) { // here we check if images is an array and if it has at least one element
+    if (!images || !images.length) {
+      // here we check if images is an array and if it has at least one element
       return new NextResponse("Images are required", { status: 400 });
     }
 
@@ -62,9 +63,19 @@ export async function POST(
 
     const product = await prismadb.product.create({
       data: {
-        label,
-        imageUrl,
+        name,
+        price,
+        isFeatured,
+        isArchived,
+        categoryId,
+        colorId,
+        sizeId,
         storeId: params.storeId,
+        images: {
+          createMany: {
+            data: [...images.map((image: { url: string }) => image)],
+          },
+        },
       },
     });
 
@@ -80,17 +91,38 @@ export async function GET(
   { params }: { params: { storeId: string } }
 ) {
   try {
+    const { searchParams } = new URL(req.url);
+    const categoryId = searchParams.get("categoryId") || undefined;
+    const colorId = searchParams.get("colorId") || undefined;
+    const sizeId = searchParams.get("sizeId") || undefined;
+    const isFeatured = searchParams.get("isFeatured");
+
     if (!params.storeId) {
       return new NextResponse("Store id is required", { status: 400 });
     }
 
-    const billboard = await prismadb.billboard.findMany({
+    const products = await prismadb.product.findMany({
       where: {
         storeId: params.storeId,
+        categoryId,
+        colorId,
+        sizeId,
+        isFeatured: isFeatured? true: undefined,
+        isArchived: false,
       },
+      include: {
+        images: true,
+        category: true,
+        color: true,
+        size: true,
+
+      }, 
+      orderBy: {
+        createdAt: 
+      }
     });
 
-    return NextResponse.json(billboard);
+    return NextResponse.json(products);
   } catch (error) {
     console.log("[BILLBOARD_POST", error);
     return new NextResponse("Internal server error", { status: 500 });

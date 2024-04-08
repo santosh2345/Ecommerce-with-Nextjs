@@ -27,13 +27,13 @@ export async function POST(
       return new NextResponse("Name is required", { status: 400 });
     }
     if (!sizeId) {
-      return new NextResponse("Name is required", { status: 400 });
+      return new NextResponse("size Id is required", { status: 400 });
     }
     if (!price) {
       return new NextResponse("Price is required", { status: 400 });
     }
     if (!colorId) {
-      return new NextResponse("Color is required", { status: 400 });
+      return new NextResponse("Color id is required", { status: 400 });
     }
     if (!categoryId) {
       return new NextResponse("Category is required", { status: 400 });

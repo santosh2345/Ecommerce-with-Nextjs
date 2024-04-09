@@ -118,13 +118,13 @@ export async function GET(
 
       }, 
       orderBy: {
-        createdAt: 
+        createdAt: 'desc'
       }
     });
 
     return NextResponse.json(products);
   } catch (error) {
-    console.log("[BILLBOARD_POST", error);
+    console.log("[PRODUCTS_POST", error);
     return new NextResponse("Internal server error", { status: 500 });
   }
 }

@@ -9,7 +9,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { BillboardColumn } from "./columns";
+import { ProductColumn } from "./columns";
 import { Button } from "@/components/ui/button";
 import { Copy, Edit, MoreHorizontal, Trash } from "lucide-react";
 import axios from "axios";
@@ -17,7 +17,7 @@ import { useState } from "react";
 import { AlertModal } from "@/components/modals/alert-modal";
 
 interface CellActionProps {
-  data: BillboardColumn;
+  data: ProductColumn;
 }
 
 export const CellAction: React.FC<CellActionProps> = ({ data }) => {
@@ -32,20 +32,20 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
 
     const onCopy = (id: string) =>{
         navigator.clipboard.writeText(id);
-        toast.success("Billboard Id is copied to the clipboard!")
+        toast.success("Product Id is copied to the clipboard!")
     }
 
     const onDelete = async () => {
         try {
           setLoading(true);
           await axios.delete(
-            `/api/${params.storeId}/billboards/${data.id}`
+            `/api/${params.storeId}/products/${data.id}`
           );
           router.refresh();
-          toast.success("Billboard deleted");
+          toast.success("Product deleted");
         } catch (error) {
           toast.error(
-            "Make sure you removed all categories using this billboard first."
+            "Something went wrong."
           );
         } finally {
           setLoading(false);

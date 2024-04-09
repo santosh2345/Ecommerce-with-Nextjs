@@ -98,12 +98,17 @@ const ProductForm: React.FC<ProductFormProps> = ({
     try {
       setLoading(true);
       if (initialData) {
+        console.log("data has been updated")
         await axios.patch(
           `/api/${params.storeId}/products/${params.productId}`,
           data
         );
+        
       } else {
         await axios.post(`/api/${params.storeId}/products`, data);
+        console.log("data has been created new")
+
+
       }
       router.refresh();
       router.push(`/${params.storeId}/products`);

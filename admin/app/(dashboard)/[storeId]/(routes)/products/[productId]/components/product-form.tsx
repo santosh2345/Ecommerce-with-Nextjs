@@ -324,6 +324,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
                 </FormItem>
               )}
             />
+            
             <FormField
               control={form.control}
               name="isFeatured"

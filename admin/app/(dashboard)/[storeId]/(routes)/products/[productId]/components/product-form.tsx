@@ -106,7 +106,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
         
       } else {
         await axios.post(`/api/${params.storeId}/products`, data);
-        console.log("data has been created new")
+        // console.log("data has been created new")
 
 
       }
@@ -115,7 +115,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
       toast.success(toastMessage);
     } catch (error) {
       toast.error("Something went wrong");
-      console.log("error: ", error);
+      // console.log("error: ", error);
     } finally {
       setLoading(false);
     }

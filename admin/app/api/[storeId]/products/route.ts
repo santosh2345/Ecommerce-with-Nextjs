@@ -42,14 +42,19 @@ export async function POST(
       return new NextResponse("Color is required", { status: 400 });
     }
     if (!images || !images.length) {
-      // here we check if images is an array and if it has at least one element
+      // here we check if images is an array and if it has at least one element  
+
+
       return new NextResponse("Images are required", { status: 400 });
     }
 
+
+     // here we check if the store id is provided
     if (!params.storeId) {
       return new NextResponse("Store id is required", { status: 400 });
     }
 
+      // here we check if the store exists and if the user is the owner of the store
     const storeByUserId = await prismadb.store.findFirst({
       where: {
         id: params.storeId,
@@ -57,6 +62,8 @@ export async function POST(
       },
     });
 
+
+    // if the store does not exist or the user is not the owner of the store, we return an error
     if (!storeByUserId) {
       return new NextResponse("Unauthorized", { status: 403 });
     }

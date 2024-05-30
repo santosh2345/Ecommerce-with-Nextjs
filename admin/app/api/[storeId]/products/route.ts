@@ -45,7 +45,7 @@ export async function POST(
       // here we check if images is an array and if it has at least one element  
 
 
-      return new NextResponse("Images are required", { status: 400 });
+      return new NextResponse("Images are requireddd", { status: 400 });
     }
 
 
